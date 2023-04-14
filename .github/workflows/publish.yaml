@@ -19,6 +19,9 @@ jobs:
 
     - name: Build and package binaries
       uses: goreleaser/goreleaser-action@v2
+      env:
+        GOOS: linux
+        GOARCH: amd64
       with:
         args: release --clean
 
