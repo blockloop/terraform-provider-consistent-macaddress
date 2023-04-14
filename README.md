@@ -10,7 +10,7 @@ This Terraform provider generates a MAC address based on a given seed string. It
 
 ## Usage
 
-[Terraform Registry(https://registry.terraform.io/providers/blockloop/consistent-macaddress/latest)
+[Terraform Registry](https://registry.terraform.io/providers/blockloop/consistent-macaddress/latest)
 
 In your Terraform configuration, add the `macaddress` provider and use the `macaddress` data source to generate a MAC address:
 
