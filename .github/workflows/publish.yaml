@@ -2,7 +2,8 @@ name: Publish Terraform Provider
 
 on:
   push:
-    branches: [master]
+    tags:
+      - '*'
 
 jobs:
   build-and-publish:
@@ -19,7 +20,7 @@ jobs:
     - name: Build and package binaries
       uses: goreleaser/goreleaser-action@v2
       with:
-        args: release --rm-dist
+        args: release --clean
 
     - name: Create GitHub release
       uses: softprops/action-gh-release@v1
