@@ -10,30 +10,30 @@ This Terraform provider generates a MAC address based on a given seed string. It
 
 ## Usage
 
-In your Terraform configuration, add the `macaddress` provider and use the `macaddress_generator` data source to generate a MAC address:
+[Terraform Registry(https://registry.terraform.io/providers/blockloop/consistent-macaddress/latest)
 
-```
-hcl
+In your Terraform configuration, add the `macaddress` provider and use the `macaddress` data source to generate a MAC address:
+
+```hcl
 terraform {
   required_providers {
-    macaddress = {
-      source = "github.com/yourusername/terraform-provider-macaddress"
+    consistent-macaddress = {
+      source = "blockloop/consistent-macaddress"
+      version = "0.2.16"
     }
   }
 }
 
-provider "macaddress" {}
+provider "consistent-macaddress" {}
 
-data "macaddress_generator" "example" {
-  seed = "my-seed-string"
+data "macaddress" "foobar" {
+  seed = "foobar"
 }
 
 output "mac_address" {
-  value = data.macaddress_generator.example.mac_address
+  value = data.macaddress.foobar.mac_address
 }
 ```
-
-Replace `yourusername` with your actual GitHub username. Run `terraform init` and `terraform apply` to generate a MAC address.
 
 ## Testing
 
@@ -41,17 +41,15 @@ To run acceptance tests:
 
 ```
 bash
-TF_ACC=1 go test -v github.com/yourusername/terraform-provider-macaddress/macaddress -timeout 120m
+TF_ACC=1 go test -v ./... -timeout 120m
 ```
 
 To run unit tests:
 
 ```
 bash
-go test -v github.com/yourusername/terraform-provider-macaddress/macaddress
+go test -v ./...
 ```
-
-Replace `yourusername` with your actual GitHub username.
 
 ## Contributing
 
