@@ -1,0 +1,34 @@
+name: Publish Terraform Provider
+
+on:
+  push:
+    branch: [master]
+    tags:
+      - '*'
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Go environment
+      uses: actions/setup-go@v2
+      with:
+        go-version: '1.19.x'
+
+    - name: Build and package binaries
+      uses: goreleaser/goreleaser-action@v2
+      with:
+        args: release --rm-dist
+
+    - name: Create GitHub release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ./dist/*
+        prerelease: false
+        body: |
+          This release includes the latest version of the Terraform provider.
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
