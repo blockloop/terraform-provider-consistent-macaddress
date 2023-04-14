@@ -22,6 +22,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPG_FINGERPRINT: 7B8A2B99BCB559057637875D76B86AE375ABCE24
           GOOS: linux
           GOARCH: amd64
         with:
