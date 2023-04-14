@@ -20,17 +20,8 @@ jobs:
     - name: Build and package binaries
       uses: goreleaser/goreleaser-action@v2
       env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOOS: linux
         GOARCH: amd64
       with:
         args: release --clean
-
-    - name: Create GitHub release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: ./dist/*
-        prerelease: false
-        body: |
-          This release includes the latest version of the Terraform provider.
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
