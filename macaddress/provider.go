@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/md5"
 	"fmt"
-	"log"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,7 +13,7 @@ import (
 func Provider() *schema.Provider {
 	return &schema.Provider{
 		DataSourcesMap: map[string]*schema.Resource{
-			"macaddress_generator": dataSourceMacAddress(),
+			"macaddress": dataSourceMacAddress(),
 		},
 	}
 }
@@ -55,8 +54,6 @@ func generateMacAddress(seed string) (string, error) {
 	hash := md5.Sum([]byte(seed))
 	macAddress := fmt.Sprintf("02:%02x:%02x:%02x:%02x:%02x", hash[0], hash[1], hash[2], hash[3], hash[4])
 	macAddress = strings.ToUpper(macAddress)
-
-	log.Printf("[DEBUG] Generated MAC address: %s", macAddress)
 
 	return macAddress, nil
 }

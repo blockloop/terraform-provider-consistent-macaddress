@@ -8,7 +8,7 @@ import (
 )
 
 func TestAccDataSourceMacAddressGenerator(t *testing.T) {
-	resourceName := "data.macaddress_generator.test"
+	resourceName := "data.macaddress.test"
 	seed := "test-seed"
 
 	resource.ParallelTest(t, resource.TestCase{
@@ -30,7 +30,7 @@ func testAccDataSourceMacAddressConfig(seed string) string {
 	return fmt.Sprintf(`
 		provider "macaddress" {}
 
-		data "macaddress_generator" "test" {
+		data "macaddress" "test" {
 		  seed = "%s"
 		}
 	`, seed)
