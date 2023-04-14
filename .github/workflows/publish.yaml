@@ -18,16 +18,9 @@ jobs:
         with:
           go-version: '1.19.x'
 
-      - name: Configure GPG Key
-        run: |
-          echo -n "$GPG_SIGNING_KEY" | gpg --import --batch
-        env:
-          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
-
       - name: Build and package binaries
         uses: goreleaser/goreleaser-action@v2
         env:
-          GPG_FINGERPRINT: 9632CC30D60A26853828F83D0721548D299121FA
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GOOS: linux
           GOARCH: amd64
